@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demander un devis · Guidiny</title>
+<meta name="description" content="Demandez votre devis Guidiny en moins de 2 minutes: web, mobile, design ou vidéo. Agence digitale à Béjaïa.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mark" viewBox="0 0 100 100"><path class="mark-stroke" d="M72.6 27.4 A32 32 0 1 0 82 50 L64 50"/><circle class="mark-dot" cx="50" cy="50" r="7"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav full-bleed">
+  <div class="wrap">
+    <a class="logo" href="index.html" aria-label="Guidiny, accueil"><svg><use href="#mark"/></svg>guidiny</a>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="index.html#a-propos">À propos</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#realisations">Réalisations</a></li>
+      <li><a href="index.html#methode">Méthode</a></li>
+    </ul>
+    <a class="btn btn-primary" href="devis.html" aria-current="page">Demander un devis</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap"><nav class="crumbs" aria-label="Fil d'Ariane"><a href="index.html">Accueil</a> / Demander un devis</nav></div>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-panel panel-brand on-brand">
+        <div class="contact-copy">
+          <span class="label">Contact</span>
+          <h1>Hder m3ana. Parlons de votre projet.</h1>
+          <p>Trois étapes, moins de 2 minutes. On vous recontacte pour en discuter, sans engagement.</p>
+          <ul>
+            <li>Devis gratuit</li>
+            <li>Réponse sous 48 h</li>
+            <li>Basés à Béjaïa, disponibles partout en Algérie</li>
+          </ul>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <div class="progress" id="progress">
+            <div class="progress-top"><span>Étape <b id="step-num">1</b> sur 3 · <span id="step-name">Service</span></span><span>Moins de 2 min</span></div>
+            <div class="bars" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+          </div>
+
+          <!-- Step 1: service -->
+          <fieldset class="step-pane" data-name="Service">
+            <legend class="step-title" tabindex="-1">Quel service vous intéresse?</legend>
+            <p class="step-hint">Plusieurs choix possibles.</p>
+            <div class="picks">
+              <label class="pick"><input id="f-s-web" type="checkbox" name="services" value="Web"><span><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="i-s" x="14" y="22" width="72" height="56" rx="10"/><path class="i-s" d="M14 38 H86"/><circle class="i-d" cx="50" cy="59" r="7"/></svg><b>Web</b><small>Site vitrine, e-commerce, plateforme</small></span></label>
+              <label class="pick"><input id="f-s-mobile" type="checkbox" name="services" value="Mobile"><span><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="i-s" x="30" y="12" width="40" height="76" rx="10"/><circle class="i-d" cx="50" cy="74" r="5"/></svg><b>Mobile</b><small>Application iOS et Android</small></span></label>
+              <label class="pick"><input id="f-s-design" type="checkbox" name="services" value="Design"><span><svg viewBox="0 0 100 100" aria-hidden="true"><path class="i-s" d="M20 76 C34 28 66 72 80 24"/><circle class="i-k" cx="20" cy="76" r="6"/><circle class="i-d" cx="80" cy="24" r="8"/></svg><b>Design</b><small>Logo, identité, UI/UX, print</small></span></label>
+              <label class="pick"><input id="f-s-video" type="checkbox" name="services" value="Filming &amp; Editing"><span><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="i-s" x="12" y="30" width="54" height="40" rx="10"/><path class="i-s" d="M66 44 L86 32 V68 L66 56"/><circle class="i-d" cx="39" cy="50" r="7"/></svg><b>Filming &amp; Editing</b><small>Tournage, montage, reels</small></span></label>
+              <label class="pick pick-wide"><input id="f-s-help" type="checkbox" name="services" value="Conseil"><span><b>Je ne sais pas encore, conseillez-moi</b><small>Vous nous expliquez votre objectif, on vous dit ce qu'il faut.</small></span></label>
+            </div>
+            <span class="err" id="err-services"></span>
+            <div class="step-nav"><span></span><button class="btn btn-primary" type="button" data-next>Continuer →</button></div>
+          </fieldset>
+
+          <!-- Step 2: project -->
+          <fieldset class="step-pane" data-name="Votre projet" hidden>
+            <legend class="step-title" tabindex="-1">Parlez-nous de votre projet</legend>
+            <div class="field"><label for="f-message">En quelques mots</label><textarea id="f-message" name="message" placeholder="Ex: j'ai un restaurant à Béjaïa et je veux un site avec le menu et la réservation." required></textarea><span class="err" data-for="f-message"></span></div>
+            <div class="row2">
+              <div class="field">
+                <label for="f-budget">Budget estimé <span class="opt">(optionnel)</span></label>
+                <select id="f-budget" name="budget">
+                  <option value="">Je ne sais pas encore</option>
+                  <option>Moins de 100 000 DA</option>
+                  <option>100 000 à 300 000 DA</option>
+                  <option>300 000 à 800 000 DA</option>
+                  <option>Plus de 800 000 DA</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-deadline">Pour quand? <span class="opt">(optionnel)</span></label>
+                <select id="f-deadline" name="deadline">
+                  <option value="">Pas de date précise</option>
+                  <option>Dès que possible</option>
+                  <option>Dans le mois</option>
+                  <option>Dans 1 à 3 mois</option>
+                </select>
+              </div>
+            </div>
+            <div class="step-nav"><button class="btn-back" type="button" data-back>← Retour</button><button class="btn btn-primary" type="button" data-next>Continuer →</button></div>
+          </fieldset>
+
+          <!-- Step 3: contact details -->
+          <fieldset class="step-pane" data-name="Vos coordonnées" hidden>
+            <legend class="step-title" tabindex="-1">Comment vous recontacter?</legend>
+            <div class="row2">
+              <div class="field"><label for="f-name">Nom et prénom</label><input id="f-name" name="name" type="text" autocomplete="name" required><span class="err" data-for="f-name"></span></div>
+              <div class="field"><label for="f-company">Entreprise <span class="opt">(optionnel)</span></label><input id="f-company" name="company" type="text" autocomplete="organization"></div>
+            </div>
+            <div class="row2">
+              <div class="field"><label for="f-phone">Téléphone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="05 XX XX XX XX" required><span class="err" data-for="f-phone"></span></div>
+              <div class="field"><label for="f-email">Email <span class="opt">(optionnel)</span></label><input id="f-email" name="email" type="email" autocomplete="email"><span class="err" data-for="f-email"></span></div>
+            </div>
+            <div class="step-nav"><button class="btn-back" type="button" data-back>← Retour</button><button class="btn btn-primary" type="submit">Envoyer ma demande →</button></div>
+            <small class="note">Vos informations servent uniquement à vous recontacter.</small>
+            <div id="form-status" role="status" aria-live="polite" hidden></div>
+          </fieldset>
+
+          <!-- Sent -->
+          <div class="done" id="form-done" hidden>
+            <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mark"/></svg>
+            <h3 class="step-title" tabindex="-1">Merci, c'est bien reçu.</h3>
+            <p>On étudie votre demande et on vous appelle sous 48 h pour en parler.</p>
+            <button class="btn btn-secondary" type="button" id="form-again">Envoyer une autre demande</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap faq">
+      <div class="sec-head">
+        <span class="label">Questions fréquentes</span>
+        <h2>Ce qu'on nous demande souvent.</h2>
+        <p class="lead">Vous ne trouvez pas votre réponse? <a href="#contact">Posez-nous la question</a>.</p>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Combien coûte un site ou une application?</summary>
+          <p>Ça dépend de ce dont vous avez besoin: un site vitrine et une plateforme sur mesure n'ont pas le même prix. Après l'appel, vous recevez un devis détaillé et gratuit. Vous pouvez aussi indiquer votre budget dans le formulaire, on vous proposera ce qui est possible avec.</p>
+        </details>
+        <details>
+          <summary>En combien de temps mon projet sera prêt?</summary>
+          <p>Le délai est fixé dans la proposition, avec une date pour chaque étape. Vous savez dès le départ quand vous validez quoi, et quand le projet est mis en ligne.</p>
+        </details>
+        <details>
+          <summary>Vous travaillez seulement à Béjaïa?</summary>
+          <p>Non. On est basés à Béjaïa, mais on travaille avec des clients partout en Algérie. Les échanges se font par appel ou en visio. Pour les tournages, on en discute selon le lieu.</p>
+        </details>
+        <details>
+          <summary>J'ai seulement une idée, c'est suffisant?</summary>
+          <p>Oui, 3andek ghir l fikra? C'est justement notre rôle. On vous aide à la préciser, à choisir les bons services et à avancer dans le bon ordre.</p>
+        </details>
+        <details>
+          <summary>Est-ce que je serai propriétaire de mon site et de mon logo?</summary>
+          <p>Oui. À la livraison, on vous remet les fichiers sources, les accès et les comptes liés à votre projet.</p>
+        </details>
+        <details>
+          <summary>Et après le lancement?</summary>
+          <p>On forme votre équipe pour qu'elle soit autonome, et on reste disponibles pour les corrections, les mises à jour et les nouvelles idées.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot full-bleed">
+  <svg class="foot-arcs" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M1010 120 A170 170 0 1 0 1120 300 L1010 300"/>
+    <path d="M-60 420 A150 150 0 0 1 150 300"/>
+    <circle cx="1000" cy="300" r="16"/>
+  </svg>
+  <div class="wrap">
+    <div class="foot-card">
+      <div class="foot-brand">
+        <a class="logo" href="index.html"><svg><use href="#mark"/></svg>guidiny</a>
+        <p>On vous guide, vous grandissez.<br>Béjaïa, Algérie</p>
+      </div>
+      <nav aria-label="Guidiny">
+        <b>Guidiny</b>
+        <a href="index.html">Accueil</a>
+        <a href="index.html#a-propos">À propos</a>
+        <a href="index.html#realisations">Réalisations</a>
+        <a href="devis.html">Contact</a>
+      </nav>
+      <nav aria-label="Services">
+        <b>Services</b>
+        <a href="web.html">Web</a>
+        <a href="mobile.html">Mobile</a>
+        <a href="design.html">Design</a>
+        <a href="video.html">Filming &amp; Editing</a>
+      </nav>
+      <div class="socials">
+        <span class="soc"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" class="g-f"/></svg><span><b>Instagram</b>Nos derniers projets</span></span>
+        <span class="soc"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10.5 V16.5 M8 7.5 V7.6 M11.5 16.5 V10.5 M11.5 13 C11.5 11 16 10 16 13 V16.5"/></svg><span><b>LinkedIn</b>Travaillons ensemble</span></span>
+        <span class="soc"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7 L12 13 L20 7"/></svg><span><b>Email</b>Écrivez-nous</span></span>
+        <span class="soc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3 V15.5 A3.5 3.5 0 1 1 10.5 12 M14 3 C14.5 5.8 16.6 7.5 19 7.6"/></svg><span><b>TikTok</b>Chouf les coulisses</span></span>
+      </div>
+    </div>
+  </div>
+  <p class="copy">© 2026 Guidiny. Tous droits réservés.</p>
+</footer>
+
+<script>
+/* Where the form sends requests. Leave empty until a form service (Formspree, Web3Forms, or your own API) is set up. */
+const FORM_ENDPOINT = "";
+
+const form = document.getElementById('contact-form');
+const panes = [...form.querySelectorAll('.step-pane')];
+const bars = [...form.querySelectorAll('.bars i')];
+const statusBox = document.getElementById('form-status');
+const doneBox = document.getElementById('form-done');
+const progress = document.getElementById('progress');
+const serviceBoxes = [...form.querySelectorAll('input[name="services"]')];
+const helpBox = document.getElementById('f-s-help');
+let current = 0;
+
+function showStep(i, focus = true) {
+  current = i;
+  panes.forEach((p, k) => { p.hidden = k !== i; });
+  bars.forEach((b, k) => b.classList.toggle('on', k <= i));
+  document.getElementById('step-num').textContent = i + 1;
+  document.getElementById('step-name').textContent = panes[i].dataset.name;
+  if (focus) panes[i].querySelector('.step-title').focus({ preventScroll: true });
+}
+
+function setError(id, msg) {
+  const input = document.getElementById(id);
+  const out = form.querySelector('[data-for="' + id + '"]');
+  input.closest('.field').classList.toggle('invalid', !!msg);
+  input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  if (out) out.textContent = msg || '';
+}
+
+function report(errors) {
+  Object.entries(errors).forEach(([id, msg]) => setError(id, msg));
+  const first = Object.keys(errors).find(id => errors[id]);
+  if (first) document.getElementById(first).focus();
+  return !first;
+}
+
+function validateStep(i) {
+  const f = form.elements;
+  if (i === 0) {
+    const ok = serviceBoxes.some(b => b.checked);
+    document.getElementById('err-services').textContent = ok ? '' : 'Choisissez au moins une option pour continuer.';
+    if (!ok) serviceBoxes[0].focus();
+    return ok;
+  }
+  if (i === 1) {
+    return report({ 'f-message': f.message.value.trim().length < 10 ? 'Décrivez votre projet en une ou deux phrases.' : '' });
+  }
+  const phone = f.phone.value.replace(/[\s.-]/g, '');
+  const email = f.email.value.trim();
+  return report({
+    'f-name': f.name.value.trim().length < 2 ? 'Indiquez votre nom.' : '',
+    'f-phone': !/^(\+213|00213|0)[5-7]\d{8}$/.test(phone) ? 'Entrez un numéro mobile algérien, par exemple 05 51 23 45 67.' : '',
+    'f-email': email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "Cette adresse email n'est pas valide." : ''
+  });
+}
+
+function showStatus(text, warn) {
+  statusBox.textContent = text;
+  statusBox.className = 'status' + (warn ? ' warn' : '');
+  statusBox.hidden = false;
+}
+
+form.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => {
+  if (validateStep(current)) showStep(current + 1);
+}));
+form.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => showStep(current - 1)));
+
+// "Conseillez-moi" excludes the four services, and the other way round.
+serviceBoxes.forEach(b => b.addEventListener('change', () => {
+  if (!b.checked) return;
+  if (b === helpBox) serviceBoxes.forEach(o => { if (o !== helpBox) o.checked = false; });
+  else helpBox.checked = false;
+  document.getElementById('err-services').textContent = '';
+}));
+
+// Service cards and department pages link to devis.html#devis-<dept>: pre-select that service and open the form at step 2.
+const DEVIS = { web: 'Web', mobile: 'Mobile', design: 'Design', video: 'Filming & Editing' };
+function openDevisFromHash() {
+  const m = /^#devis-(\w+)$/.exec(location.hash);
+  if (!m || !DEVIS[m[1]]) return;
+  serviceBoxes.forEach(b => { b.checked = b.value === DEVIS[m[1]]; });
+  doneBox.hidden = true; progress.hidden = false;
+  showStep(1, false);
+  document.getElementById('contact').scrollIntoView();
+  panes[1].querySelector('.step-title').focus({ preventScroll: true });
+}
+openDevisFromHash();
+window.addEventListener('hashchange', openDevisFromHash);
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  // Enter in a field of steps 1-2 moves forward instead of sending.
+  if (current < panes.length - 1) {
+    if (validateStep(current)) showStep(current + 1);
+    return;
+  }
+  if (!validateStep(current)) return;
+  const data = Object.fromEntries(new FormData(form));
+  data.services = serviceBoxes.filter(b => b.checked).map(b => b.value);
+
+  if (!FORM_ENDPOINT) {
+    showStatus("Le formulaire n'est pas encore relié à une boîte de réception. Votre demande n'a pas été envoyée.", true);
+    return;
+  }
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  try {
+    const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) });
+    if (!res.ok) throw new Error(res.status);
+    form.reset();
+    statusBox.hidden = true;
+    panes.forEach(p => { p.hidden = true; });
+    progress.hidden = true;
+    doneBox.hidden = false;
+    doneBox.querySelector('.step-title').focus();
+  } catch (err) {
+    showStatus("L'envoi a échoué. Vérifiez votre connexion et réessayez.", true);
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+document.getElementById('form-again').addEventListener('click', () => {
+  doneBox.hidden = true;
+  progress.hidden = false;
+  showStep(0);
+});
+
+form.querySelectorAll('input:not([type="checkbox"]), textarea').forEach(el => el.addEventListener('input', () => {
+  if (el.closest('.field')?.classList.contains('invalid')) setError(el.id, '');
+}));
+</script>
+</body>
+</html>

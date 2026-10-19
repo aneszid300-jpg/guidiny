@@ -1,0 +1,374 @@
+/* =====================================================================
+   Guidiny · styles partagés par toutes les pages
+   Couleur principale: #273F27 (forest). Les valeurs suivent
+   brand/system/project/tokens.json.
+
+   1. Tokens          5. Accueil: hero, à propos, services
+   2. Base            6. Réalisations et maquettes
+   3. Mise en page    7. Pages départements
+   4. Composants      8. Méthode
+                      9. Devis: formulaire et FAQ
+                     10. Navigation et footer
+   ===================================================================== */
+
+/* 1. Tokens ----------------------------------------------------------- */
+:root {
+  --forest: #273F27; --deep: #395B39; --leaf: #7AA95D; --sage: #BEDDB0; --cream: #F5F3EC; --ink: #141A14;
+  --surface: #F5F3EC; --surface-raised: #FFFFFF; --surface-brand: #273F27;
+  --text: #141A14; --text-muted: #5A665A; --text-brand: #273F27; --line: #DCE3D6;
+  --accent: #273F27; --accent-hover: #395B39; --on-accent: #F5F3EC; --highlight: #7AA95D; --danger: #B4472F;
+  --font-display: "Sora", "Manrope", system-ui, sans-serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+  --gutter: 20px;
+  --section: clamp(56px, 7vw, 88px);
+  --gap: 14px;
+  --radius-sm: 8px; --radius-md: 14px; --radius-lg: 24px; --radius-xl: 28px; --radius-pill: 999px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --surface: #273F27; --surface-raised: #2F4A2F; --surface-brand: #1E321E;
+  --text: #F5F3EC; --text-muted: #BCCAB6; --text-brand: #BEDDB0; --line: #3D5A3D;
+  --accent: #BEDDB0; --accent-hover: #D3E8C9; --on-accent: #1E321E; --danger: #E07A5F; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --surface: #273F27; --surface-raised: #2F4A2F; --surface-brand: #1E321E;
+  --text: #F5F3EC; --text-muted: #BCCAB6; --text-brand: #BEDDB0; --line: #3D5A3D;
+  --accent: #BEDDB0; --accent-hover: #D3E8C9; --on-accent: #1E321E; --danger: #E07A5F; color-scheme: dark }
+
+/* 2. Base ------------------------------------------------------------- */
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+html { scroll-behavior: smooth }
+body { margin: 0; background: var(--surface); color: var(--text); font: 400 16px/1.65 var(--font-body); padding-inline: var(--gutter) }
+h1, h2, h3, p { margin: 0 }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; text-wrap: balance; color: var(--text) }
+a { color: inherit }
+:focus-visible { outline: 2px solid var(--highlight); outline-offset: 3px; border-radius: 4px }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto }
+  *, *::before, *::after { animation: none !important; transition: none !important }
+}
+
+/* 3. Mise en page ------------------------------------------------------ */
+.wrap { max-width: 1160px; margin-inline: auto }
+.full-bleed { margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter) }
+/* Une seule règle d'espacement: chaque section a la même marge, sans doubler entre deux sections. */
+section { padding-block: var(--section); scroll-margin-top: 80px }
+section:not(.band) + section:not(.band) { padding-top: 0 }
+.band { background: var(--surface-raised); border-block: 1px solid var(--line) }
+.sec-head { display: grid; gap: 14px; margin-bottom: 40px; max-width: 720px }
+.sec-head h2, .about-copy h2 { font-size: clamp(30px, 4.4vw, 44px); line-height: 1.12; letter-spacing: -.02em }
+.label { font: 600 12px/1.3 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted) }
+.lead { font-size: 18px; line-height: 28px; color: var(--text-muted); max-width: 60ch }
+.crumbs { font-size: 14px; color: var(--text-muted); padding-top: 28px }
+.crumbs a { color: var(--text-muted) }
+main > .wrap:first-child + section { padding-top: 20px }
+.crumbs a:hover { color: var(--text) }
+
+/* 4. Composants -------------------------------------------------------- */
+/* Boutons */
+.btn { display: inline-flex; align-items: center; gap: 8px; font: 600 15px/1 var(--font-body); padding: 16px 22px; border-radius: var(--radius-pill); border: 1.5px solid transparent; text-decoration: none; cursor: pointer; transition: background .2s, border-color .2s, color .2s }
+.btn-primary { background: var(--accent); color: var(--on-accent) }
+.btn-primary:hover { background: var(--accent-hover) }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--line) }
+.btn-secondary:hover { border-color: var(--text-muted) }
+.on-brand .btn-primary { background: var(--sage); color: var(--forest) }
+.on-brand .btn-primary:hover { background: var(--cream) }
+.on-brand .btn-secondary { color: var(--cream); border-color: var(--deep) }
+.on-brand .btn-secondary:hover { border-color: var(--sage) }
+.btn-ghost-light { color: var(--cream); border-color: var(--cream); background: transparent }
+.btn-ghost-light:hover { background: var(--cream); color: var(--forest) }
+.btn-back { background: none; border: 0; padding: 12px 4px; font: 600 15px var(--font-body); color: var(--text-muted); cursor: pointer }
+.btn-back:hover { color: var(--text) }
+
+/* Panneau vert (hero, page département, devis) */
+.panel-brand { background: var(--surface-brand); color: var(--cream); border-radius: var(--radius-xl); padding: clamp(28px, 5vw, 64px) }
+.panel-brand .label { color: var(--sage) }
+.panel-brand h1, .panel-brand h2 { color: var(--cream) }
+.panel-brand p { color: var(--cream); opacity: .82 }
+/* Le formulaire blanc posé sur un panneau vert garde les couleurs normales. */
+.panel-brand form p { color: var(--text-muted); opacity: 1 }
+.on-brand form .btn-primary { background: var(--accent); color: var(--on-accent) }
+.on-brand form .btn-primary:hover { background: var(--accent-hover) }
+
+/* Carte: fond relevé, bordure fine */
+.card-raised { background: var(--surface-raised); border: 1px solid var(--line); border-radius: var(--radius-md); min-width: 0 }
+
+/* Logo et icônes */
+.logo { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font: 600 24px/1 var(--font-display); letter-spacing: -.03em; color: var(--text) }
+.logo svg { width: 30px; height: 30px; flex: none }
+.mark-stroke { fill: none; stroke: var(--text-brand); stroke-width: 10; stroke-linecap: round }
+.mark-dot { fill: var(--highlight) }
+.i-s { fill: none; stroke: var(--text-brand); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round }
+.i-d { fill: var(--highlight) }
+.i-k { fill: var(--text-brand) }
+
+/* Étiquettes */
+.tag { font: 600 11px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; padding: 6px 9px; border-radius: var(--radius-sm); background: var(--sage); color: var(--forest) }
+.tag-ex { background: transparent; border: 1px dashed var(--text-muted); color: var(--text-muted) }
+.chip { font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: var(--radius-pill); background: var(--surface); color: var(--text-brand); border: 1px solid var(--line) }
+
+/* 5. Accueil ----------------------------------------------------------- */
+/* Hero */
+.hero { padding-block: 40px 0 }
+.hero-panel { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 24px; align-items: center; overflow: hidden }
+.hero-copy { display: grid; gap: 22px; align-content: center }
+.hero-copy h1 { font-size: clamp(40px, 6.2vw, 72px); line-height: 1.02; letter-spacing: -.035em }
+.hero-copy h1 em { font-style: normal; color: var(--sage) }
+.hero-copy p { font-size: 18px; line-height: 28px; max-width: 46ch }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px }
+.hero-map { width: 100%; max-width: 520px; justify-self: center }
+.hero-map svg { width: 100%; height: auto; display: block; overflow: visible }
+.route { fill: none; stroke: var(--cream); stroke-width: 14; stroke-linecap: round; stroke-dasharray: 100; animation: draw 2.2s cubic-bezier(.55,0,.25,1) .2s both }
+.route-ghost { fill: none; stroke: var(--deep); stroke-width: 14; stroke-linecap: round }
+.stop { animation: pop .5s cubic-bezier(.3,1.5,.5,1) both; transform-box: fill-box; transform-origin: center }
+.stop circle { fill: var(--sage) }
+.stop .ic { fill: none; stroke: var(--forest); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round }
+.stop .icd { fill: var(--forest) }
+.stop-label { font: 600 15px var(--font-display); fill: var(--cream); letter-spacing: -.01em }
+.goal { fill: var(--leaf); animation: pop .5s cubic-bezier(.3,1.5,.5,1) 2.25s both; transform-box: fill-box; transform-origin: center }
+.goal-label { font: 500 13px var(--font-body); fill: var(--sage); animation: fade .6s ease-out 2.5s both }
+@keyframes draw { from { stroke-dashoffset: 100 } to { stroke-dashoffset: 0 } }
+@keyframes pop { from { transform: scale(0) } to { transform: scale(1) } }
+@keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+@media (max-width: 900px) {
+  .hero-panel { grid-template-columns: 1fr }
+  .hero-map { max-width: 400px }
+  .stop-label { font-size: 22px }
+  .goal-label { font-size: 18px }
+}
+.trust { display: flex; flex-wrap: wrap; gap: 10px 28px; padding-top: 22px; color: var(--text-muted); font-size: 14px }
+.trust span { display: inline-flex; align-items: center; gap: 8px }
+.trust span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--highlight) }
+
+/* À propos */
+.about { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center }
+.about-copy { display: grid; gap: 18px }
+.values { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px }
+.value { padding: 22px; display: grid; gap: 6px; align-content: start }
+.value h3 { font-size: 20px; letter-spacing: -.01em; display: flex; align-items: center; gap: 10px }
+.value h3::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--highlight) }
+.value p { color: var(--text-muted); font-size: 15px; line-height: 23px }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr } }
+@media (max-width: 420px) { .values { grid-template-columns: 1fr } }
+
+/* Services: grandes cartes cliquables qui ouvrent le devis */
+.svc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap) }
+.svc-big { display: flex; flex-direction: column; gap: 14px; padding: clamp(24px, 3.5vw, 40px); border-width: 1.5px; border-radius: var(--radius-lg); text-decoration: none; color: var(--text); transition: border-color .2s, transform .2s }
+.svc-big:hover { border-color: var(--text-brand); transform: translateY(-3px) }
+.svc-top { display: flex; justify-content: space-between; align-items: start }
+.svc-top svg { width: 68px; height: 68px }
+.svc-arrow { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; font-size: 20px; border: 1.5px solid var(--line); color: var(--text-brand); transition: background .2s, color .2s, border-color .2s }
+.svc-big:hover .svc-arrow { background: var(--accent); border-color: var(--accent); color: var(--on-accent) }
+.svc-big h3 { font-size: clamp(24px, 3vw, 30px); line-height: 1.15; letter-spacing: -.02em }
+.svc-big p { color: var(--text-muted); line-height: 26px; max-width: 42ch }
+.svc-big ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px }
+.svc-go { margin-top: auto; padding-top: 8px; font-weight: 600; font-size: 15px; color: var(--text-brand) }
+@media (max-width: 760px) { .svc-grid { grid-template-columns: 1fr } }
+
+/* 6. Réalisations et maquettes ------------------------------------------- */
+.depts, .work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap) }
+.work-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+.case, .dept-tile { overflow: hidden; display: grid; grid-template-rows: auto 1fr }
+.case-visual { aspect-ratio: 16 / 9; display: grid; place-items: center; overflow: hidden }
+.case-body { padding: 20px 24px 24px; display: grid; gap: 6px; align-content: start }
+.case-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center }
+.case h3 { font-size: 20px; letter-spacing: -.01em }
+.case p { color: var(--text-muted); font-size: 15px; line-height: 24px }
+.dept-tile { text-decoration: none; color: inherit; transition: border-color .2s, transform .2s }
+.dept-tile:hover { border-color: var(--text-brand); transform: translateY(-2px) }
+.dept-tile .case-visual { aspect-ratio: 16 / 8 }
+.dept-tile-body { padding: 20px 24px 22px; display: flex; gap: 16px; align-items: center }
+.dept-tile-body svg { width: 44px; height: 44px; flex: none }
+.dept-tile-body div { display: grid; gap: 2px; min-width: 0 }
+.dept-tile h3 { font-size: 21px; letter-spacing: -.01em }
+.dept-tile p { color: var(--text-muted); font-size: 14px }
+.dept-tile .go { margin-left: auto; flex: none; font-weight: 600; font-size: 14px; color: var(--text-brand); white-space: nowrap }
+@media (max-width: 980px) { .work-3 { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 760px) { .depts, .work, .work-3 { grid-template-columns: 1fr } .dept-tile .go { display: none } }
+
+/* Maquettes dessinées en CSS. Couleurs par projet: --a principale, --b douce, --c accent, --d papier, --bg fond. */
+.mk { --a: var(--forest); --b: var(--sage); --c: var(--leaf); --d: var(--cream); --bg: var(--sage); background: var(--bg) }
+.mk-copy { display: grid; gap: 7px; align-content: center }
+.browser { width: 78%; aspect-ratio: 16 / 10; background: var(--d); border-radius: 10px; box-shadow: 0 0 0 1px rgba(20,26,20,.08); overflow: hidden; display: grid; grid-template-rows: 18px 1fr }
+.browser .bar { background: var(--a); display: flex; gap: 4px; align-items: center; padding-left: 8px }
+.browser .bar i { width: 5px; height: 5px; border-radius: 50%; background: var(--b) }
+.browser .pg { display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; padding: 14px; min-height: 0 }
+.browser .pg.shop { grid-template-columns: repeat(3, 1fr); grid-template-rows: auto 1fr }
+.browser .pg.shop .ln { grid-column: 1 / -1; width: 40% }
+.browser .pg.shop .ph { min-height: 40px }
+.browser .pg.book { grid-template-columns: 1fr 1fr }
+.cal { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; align-content: center }
+.cal i { aspect-ratio: 1; border-radius: 3px; background: var(--b) }
+.cal i:nth-child(7) { background: var(--c) }
+.ln { height: 7px; border-radius: 4px; background: var(--a); opacity: .85 }
+.ln.s { width: 60%; opacity: .35 }
+.ln.m { width: 80%; opacity: .35 }
+.btn-mk { height: 12px; width: 46%; border-radius: 999px; background: var(--c); margin-top: 4px }
+.ph { border-radius: 6px; background: repeating-linear-gradient(135deg, var(--c) 0 8px, var(--b) 8px 16px) }
+.phones { display: flex; gap: 14px; align-items: end }
+.phone { width: 74px; aspect-ratio: 9 / 18; border-radius: 14px; background: var(--d); border: 4px solid var(--ink); padding: 8px 6px; display: grid; gap: 6px; align-content: start }
+.phone:nth-child(2) { width: 90px }
+.phone .card { height: 22px; border-radius: 5px; background: var(--b) }
+.phone .card.big { height: 40px }
+.phone .card.acc { background: var(--c) }
+.phone .cta { height: 14px; border-radius: 999px; background: var(--a); margin-top: 4px }
+.brandboard { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 74% }
+.bb { border-radius: 10px; aspect-ratio: 1; display: grid; place-items: center; font: 600 22px var(--font-display); letter-spacing: -.02em; text-align: center; padding: 6px }
+.bb1 { background: var(--a); color: var(--d) }
+.bb2 { background: var(--d); color: var(--a); font-size: 17px; box-shadow: inset 0 0 0 1px rgba(20,26,20,.1) }
+.bb3 { grid-column: span 2; aspect-ratio: auto; height: 34px; background: linear-gradient(90deg, var(--a) 0 25%, var(--c) 25% 50%, var(--b) 50% 75%, var(--d) 75%) }
+.mk-film { background: linear-gradient(160deg, var(--a), var(--b) 55%, var(--c)) }
+.films { display: flex; gap: 10px; align-items: center; height: 82% }
+.film { width: 80%; aspect-ratio: 16 / 9; border-radius: 10px; border: 2px solid rgba(245,243,236,.6); display: grid; place-items: center; position: relative }
+.films .film { width: auto; height: 100%; aspect-ratio: 9 / 16 }
+.film::before { content: ""; border-left: 26px solid var(--cream); border-block: 16px solid transparent; margin-left: 6px }
+.films .film::before { border-left-width: 16px; border-block-width: 10px }
+.film .tl { position: absolute; inset: auto 10px 10px; height: 4px; border-radius: 4px; background: rgba(245,243,236,.3) }
+.film .tl::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 38%; border-radius: 4px; background: var(--sage) }
+.film .rec { position: absolute; top: 10px; left: 12px; font: 600 10px var(--font-body); color: var(--cream); letter-spacing: .1em; display: flex; gap: 5px; align-items: center }
+.film .rec::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #E0604A }
+
+/* 7. Pages départements -------------------------------------------------- */
+.dept-hero { margin-top: 16px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: center }
+.dept-hero .badge { width: clamp(88px, 14vw, 148px); aspect-ratio: 1; border-radius: var(--radius-lg); background: var(--sage); display: grid; place-items: center }
+.dept-hero .badge svg { width: 62%; height: 62% }
+.dept-hero .badge .i-s { stroke: var(--forest) }
+.dept-hero .badge .i-k { fill: var(--forest) }
+.dept-hero .badge .i-d { fill: var(--leaf) }
+.dept-hero-copy { display: grid; gap: 16px; align-content: center }
+.dept-hero h1 { font-size: clamp(38px, 6vw, 64px); line-height: 1.04; letter-spacing: -.03em }
+.dept-hero p { font-size: 18px; line-height: 28px; max-width: 54ch }
+.offers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; border-top: 1px solid var(--line) }
+.offer { padding: 24px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 14px 1fr; gap: 4px 14px; align-content: start }
+.offer::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--highlight); margin-top: 9px; grid-row: span 2 }
+.offer h3 { font-size: 19px; letter-spacing: -.01em }
+.offer p { color: var(--text-muted); font-size: 15px; line-height: 24px }
+.others { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px }
+.other { display: flex; gap: 14px; align-items: center; padding: 18px 20px; text-decoration: none; color: var(--text); font: 600 17px var(--font-display); letter-spacing: -.01em; transition: border-color .2s }
+.other:hover { border-color: var(--text-brand) }
+.other svg { width: 34px; height: 34px; flex: none }
+.other span { margin-left: auto; color: var(--text-brand) }
+@media (max-width: 760px) { .offers, .others { grid-template-columns: 1fr } }
+@media (max-width: 640px) { .dept-hero { grid-template-columns: 1fr } }
+
+/* 8. Méthode ------------------------------------------------------------- */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); position: relative }
+.steps::before { content: ""; position: absolute; left: 22px; right: 22px; top: 21px; height: 4px; border-radius: 4px; background: var(--line) }
+.step { position: relative; display: grid; gap: 10px; padding-right: 24px; align-content: start }
+.step .n { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font: 600 16px var(--font-display); background: var(--surface-raised); border: 4px solid var(--line); color: var(--text-brand); position: relative; font-variant-numeric: tabular-nums }
+.step:last-child .n { background: var(--highlight); border-color: var(--highlight); color: var(--ink) }
+.step h3 { font-size: 20px; letter-spacing: -.01em; padding-top: 6px }
+.step .dz { font-size: 14px; font-weight: 600; color: var(--text-brand) }
+.step p { color: var(--text-muted); font-size: 15px; line-height: 24px }
+@media (max-width: 860px) {
+  .steps { grid-template-columns: 1fr; gap: 28px }
+  .steps::before { left: 21px; right: auto; top: 22px; bottom: 22px; width: 4px; height: auto }
+  .step { grid-template-columns: 46px 1fr; column-gap: 18px; padding-right: 0 }
+  .step .n { grid-row: span 3 }
+  .step h3 { padding-top: 8px }
+}
+
+/* 9. Devis: formulaire et FAQ -------------------------------------------- */
+.contact-panel { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(28px, 5vw, 64px) }
+.contact-copy { display: grid; gap: 18px; align-content: start }
+.contact-copy h1 { font-size: clamp(32px, 4.4vw, 48px); line-height: 1.08; letter-spacing: -.025em }
+.contact-copy ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 12px }
+.contact-copy li { display: flex; gap: 12px; align-items: baseline }
+.contact-copy li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--sage); transform: translateY(-1px) }
+form { background: var(--surface-raised); color: var(--text); border-radius: var(--radius-lg); padding: clamp(20px, 3.5vw, 36px); display: grid; gap: 18px; min-width: 0 }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0 }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px }
+.field { display: grid; gap: 7px; min-width: 0 }
+.field > label { font-size: 14px; font-weight: 600 }
+.opt { font-weight: 400; color: var(--text-muted) }
+input[type="text"], input[type="tel"], input[type="email"], select, textarea { width: 100%; font: 400 16px/1.4 var(--font-body); color: var(--text); background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px }
+input:hover, select:hover, textarea:hover { border-color: var(--text-muted) }
+textarea { min-height: 116px; resize: vertical }
+.err { font-size: 13px; color: var(--danger) }
+.err:empty { display: none }
+.field.invalid input, .field.invalid textarea { border-color: var(--danger) }
+.note { color: var(--text-muted); font-size: 13px }
+.status { border-radius: var(--radius-sm); padding: 14px 16px; font-size: 15px; background: var(--sage); color: var(--forest) }
+.status.warn { background: transparent; border: 1.5px dashed var(--text-muted); color: var(--text) }
+/* Étapes */
+.progress { display: grid; gap: 10px }
+.progress-top { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; color: var(--text-muted); font-variant-numeric: tabular-nums }
+.progress-top b { color: var(--text); font-weight: 600 }
+.bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px }
+.bars i { height: 4px; border-radius: 4px; background: var(--line); transition: background .3s }
+.bars i.on { background: var(--highlight) }
+.step-pane { display: grid; gap: 18px }
+.step-pane > legend { float: left; width: 100%; padding: 0 }
+.step-title { font: 600 22px/1.25 var(--font-display); letter-spacing: -.01em; color: var(--text); outline: none }
+.step-hint { font-size: 14px; color: var(--text-muted); margin-top: -10px }
+.step-nav { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding-top: 4px }
+.picks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px }
+.pick { position: relative; min-width: 0 }
+.pick-wide { grid-column: 1 / -1 }
+.pick input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer }
+.pick span { display: grid; grid-template-columns: 36px 1fr; column-gap: 12px; align-items: center; padding: 14px 40px 14px 14px; min-height: 76px; border: 1.5px solid var(--line); border-radius: var(--radius-md); background: var(--surface); position: relative; transition: border-color .15s, background .15s }
+.pick span::after { content: ""; position: absolute; top: 12px; right: 12px; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--line) }
+.pick svg { width: 36px; height: 36px; grid-row: span 2 }
+.pick b { font: 600 15px/1.3 var(--font-display); color: var(--text) }
+.pick small { font-size: 12.5px; line-height: 1.35; color: var(--text-muted) }
+.pick-wide span { grid-template-columns: 1fr; min-height: 0 }
+.pick input:hover + span { border-color: var(--text-muted) }
+.pick input:focus-visible + span { outline: 2px solid var(--highlight); outline-offset: 2px }
+.pick input:checked + span { border-color: var(--accent); background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--accent) }
+.pick input:checked + span::after { background: var(--highlight); border-color: var(--highlight) }
+.done { display: grid; gap: 14px; justify-items: start; padding-block: 12px }
+.done svg { width: 56px; height: 56px }
+.done p { color: var(--text-muted) }
+@media (max-width: 900px) { .contact-panel { grid-template-columns: 1fr } }
+@media (max-width: 520px) { .row2, .picks { grid-template-columns: 1fr } }
+/* FAQ */
+.faq { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 64px); align-items: start }
+.faq .sec-head { margin-bottom: 0 }
+.faq-list details { border-bottom: 1px solid var(--line) }
+.faq-list details:first-child { border-top: 1px solid var(--line) }
+.faq-list summary { list-style: none; cursor: pointer; padding: 20px 0; display: flex; justify-content: space-between; gap: 16px; font: 600 18px/1.35 var(--font-display); letter-spacing: -.01em; color: var(--text) }
+.faq-list summary::-webkit-details-marker { display: none }
+.faq-list summary::after { content: "+"; flex: none; font: 500 24px/1 var(--font-body); color: var(--text-brand); transition: transform .2s }
+.faq-list details[open] summary::after { transform: rotate(45deg) }
+.faq-list details p { padding-bottom: 20px; color: var(--text-muted); max-width: 62ch }
+@media (max-width: 860px) { .faq { grid-template-columns: 1fr } }
+
+/* 10. Navigation et footer ----------------------------------------------- */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); border-bottom: 1px solid var(--line); padding-block: 14px }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px }
+.nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; font-weight: 500; font-size: 15px }
+.nav ul a { text-decoration: none; color: var(--text-muted) }
+.nav ul a:hover { color: var(--text) }
+.nav ul a[aria-current="page"] { color: var(--text); text-decoration: underline; text-decoration-color: var(--highlight); text-decoration-thickness: 2px; text-underline-offset: 8px }
+.nav .btn { padding: 12px 18px; font-size: 14px }
+@media (max-width: 1040px) { .nav ul { display: none } }
+
+/* Footer: bande verte, appel à l'action, carte blanche, copyright */
+.site-foot { position: relative; overflow: hidden; padding-block: 88px 28px; background: var(--surface-brand); color: var(--cream); display: grid; gap: 48px }
+.foot-arcs { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none }
+.foot-arcs path { fill: none; stroke: var(--deep); stroke-width: 36; stroke-linecap: round }
+.site-foot:not(:has(.closing)) .foot-arcs { display: none }
+.foot-arcs circle { fill: var(--leaf) }
+.site-foot > :not(.foot-arcs) { position: relative }
+.closing { display: grid; justify-items: center; text-align: center; gap: 16px; max-width: 760px }
+.closing h2 { color: var(--cream); font-size: clamp(32px, 5vw, 54px); line-height: 1.08; letter-spacing: -.03em }
+.closing p { color: var(--cream); opacity: .82; max-width: 52ch }
+.closing .btn { margin-top: 8px }
+.foot-card { background: var(--surface-raised); color: var(--text); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .8fr) minmax(0, .9fr) minmax(0, 1.4fr); gap: 32px; align-items: start }
+.foot-brand { display: grid; gap: 14px }
+.foot-brand .logo { font-size: 30px }
+.foot-brand .logo svg { width: 38px; height: 38px }
+.foot-brand p { color: var(--text-muted); font-size: 14px }
+.foot-card nav { display: grid; gap: 10px; font-size: 15px; align-content: start }
+.foot-card nav b { font-weight: 600; color: var(--text); margin-bottom: 2px }
+.foot-card nav a { text-decoration: none; color: var(--text-muted) }
+.foot-card nav a:hover { color: var(--text-brand) }
+.socials { display: grid; gap: 10px }
+.soc { display: flex; align-items: center; gap: 12px; padding: 10px 18px; border: 1.5px solid var(--line); border-radius: var(--radius-pill); text-decoration: none; color: var(--text-muted); font-size: 14px; transition: border-color .2s }
+a.soc:hover { border-color: var(--text-brand) }
+.soc svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--text-brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round }
+.soc .g-f { fill: var(--text-brand); stroke: none }
+.soc span { display: flex; gap: 6px; flex-wrap: wrap; min-width: 0 }
+.soc b { font-weight: 600; color: var(--text) }
+.copy { text-align: center; color: var(--cream); opacity: .75; font-size: 13px }
+@media (max-width: 980px) { .foot-card { grid-template-columns: 1fr 1fr } }
+@media (max-width: 520px) { .foot-card { grid-template-columns: 1fr } }
