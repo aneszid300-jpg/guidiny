@@ -38,3 +38,15 @@
     observer.observe(el);
   });
 })();
+
+/* Bouton « Retour »: revient à la page précédente du site; sinon suit son lien vers l'accueil. */
+document.querySelectorAll('[data-back]').forEach(function (link) {
+  link.addEventListener('click', function (event) {
+    var fromSite = false;
+    try { fromSite = document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
+    if (fromSite && history.length > 1) {
+      event.preventDefault();
+      history.back();
+    }
+  });
+});

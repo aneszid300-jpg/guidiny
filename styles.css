@@ -67,10 +67,17 @@ section:not(.band) + section:not(.band) { padding-top: 0 }
 .sec-head h2, .about-copy h2 { font-size: clamp(30px, 4.4vw, 44px); line-height: 1.12; letter-spacing: -.02em }
 .label { font: 600 12px/1.3 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted) }
 .lead { font-size: 18px; line-height: 28px; color: var(--text-muted); max-width: 60ch }
-.crumbs { font-size: 14px; color: var(--text-muted); padding-top: 28px }
+/* Haut de page intérieure: bouton retour + fil d'Ariane */
+.page-top { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 18px; padding-top: 24px }
+main > .wrap:has(> .page-top:only-child) + section { padding-top: 20px }
+.crumbs { font-size: 14px; color: var(--text-muted) }
 .crumbs a { color: var(--text-muted) }
-main > .wrap:has(> .crumbs:only-child) + section { padding-top: 20px }
 .crumbs a:hover { color: var(--text) }
+.back { display: inline-flex; align-items: center; gap: 10px; padding: 6px 16px 6px 6px; border-radius: var(--radius-pill); text-decoration: none; color: var(--text); font: 600 14px/1 var(--font-body);
+  background: var(--glass-fill); border: 1px solid var(--glass-edge); box-shadow: var(--glass-shadow); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); transition: background .2s, border-color .2s }
+.back svg { width: 30px; height: 30px; padding: 7px; border-radius: 50%; background: var(--accent); fill: none; stroke: var(--on-accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .25s }
+.back:hover { background: var(--glass-fill-hover); border-color: var(--accent) }
+.back:hover svg { transform: translateX(-3px) }
 
 /* 4. Composants -------------------------------------------------------- */
 /* Boutons */
