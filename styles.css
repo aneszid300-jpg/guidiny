@@ -9,6 +9,7 @@
    4. Composants      8. Méthode
                       9. Devis: formulaire et FAQ
                      10. Navigation et footer
+                     11. Animations
    ===================================================================== */
 
 /* 1. Tokens ----------------------------------------------------------- */
@@ -389,3 +390,29 @@ a.soc:hover { border-color: var(--text-brand) }
 .copy { text-align: center; color: var(--text-muted); font-size: 13px }
 @media (max-width: 980px) { .foot-card { grid-template-columns: 1fr 1fr } }
 @media (max-width: 520px) { .foot-card { grid-template-columns: 1fr } }
+
+/* 11. Animations ---------------------------------------------------------- */
+/* Toutes s'arrêtent si le visiteur demande de réduire les animations (règle en section 2). */
+
+/* Les halos du fond dérivent très lentement. */
+body::before { animation: drift 30s ease-in-out infinite alternate; will-change: transform }
+@keyframes drift { to { transform: translate3d(-3%, 2%, 0) rotate(2deg) } }
+
+/* Apparition au défilement: classes posées par main.js, seulement sous la ligne de flottaison. */
+.reveal { opacity: 0; transform: translateY(22px) }
+.reveal.in { opacity: 1; transform: none; transition: opacity .55s ease, transform .55s cubic-bezier(.2, .7, .2, 1) }
+
+/* Boutons: léger soulèvement. */
+.btn { transition: background .2s, border-color .2s, color .2s, transform .2s }
+.btn:hover { transform: translateY(-2px) }
+
+/* Cartes cliquables: un reflet traverse le verre au survol. */
+a.card-raised { position: relative; overflow: hidden }
+a.card-raised::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, .10) 46%, transparent 62%); transform: translateX(-120%); transition: transform .9s ease }
+a.card-raised:hover::after { transform: translateX(120%) }
+.svc-arrow { transition: background .2s, color .2s, border-color .2s, transform .3s }
+.svc-big:hover .svc-arrow { transform: rotate(-45deg) }
+
+/* Hero: le point « Votre objectif » respire une fois le chemin tracé. */
+.goal { animation: pop .5s cubic-bezier(.3, 1.5, .5, 1) 2.25s both, breathe 3.2s ease-in-out 3s infinite }
+@keyframes breathe { 50% { filter: drop-shadow(0 0 10px rgba(190, 221, 176, .85)) } }
