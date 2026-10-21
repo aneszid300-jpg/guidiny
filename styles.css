@@ -63,7 +63,7 @@ section:not(.band) + section:not(.band) { padding-top: 0 }
 .lead { font-size: 18px; line-height: 28px; color: var(--text-muted); max-width: 60ch }
 .crumbs { font-size: 14px; color: var(--text-muted); padding-top: 28px }
 .crumbs a { color: var(--text-muted) }
-main > .wrap:has(> .crumbs) + section { padding-top: 20px }
+main > .wrap:has(> .crumbs:only-child) + section { padding-top: 20px }
 .crumbs a:hover { color: var(--text) }
 
 /* 4. Composants -------------------------------------------------------- */
