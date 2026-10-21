@@ -18,6 +18,11 @@
   --night: #050805;
   --surface: #070B07; --surface-raised: #0E170E; --surface-brand: #0C150C;
   --glass: rgba(190, 221, 176, .045); --glass-strong: rgba(190, 221, 176, .08);
+  --glass-fill: linear-gradient(150deg, rgba(190, 221, 176, .13), rgba(190, 221, 176, .04) 45%, rgba(190, 221, 176, .02));
+  --glass-fill-hover: linear-gradient(150deg, rgba(190, 221, 176, .19), rgba(190, 221, 176, .07) 45%, rgba(190, 221, 176, .03));
+  --glass-edge: rgba(214, 235, 203, .20);
+  --glass-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 12px 32px rgba(0, 0, 0, .35);
+  --glass-blur: blur(18px) saturate(140%);
   --text: #F1F4EC; --text-muted: #A9B8A3; --text-brand: #BEDDB0; --line: rgba(190, 221, 176, .14);
   --accent: #BEDDB0; --accent-hover: #D6EBCB; --on-accent: #0A120A; --highlight: #7AA95D; --danger: #E07A5F;
   --glow: #1F7A1F;
@@ -97,7 +102,12 @@ main > .wrap:has(> .crumbs:only-child) + section { padding-top: 20px }
 .on-brand form .btn-primary:hover { background: var(--accent-hover) }
 
 /* Carte: fond relevé, bordure fine */
-.card-raised { background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius-md); min-width: 0; backdrop-filter: blur(10px) }
+.card-raised { border-radius: var(--radius-md); min-width: 0 }
+/* Verre: toutes les cartes du site partagent ce rendu. */
+.card-raised, .foot-card, form, .pick span {
+  background: var(--glass-fill); border: 1px solid var(--glass-edge); box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur) }
+a.card-raised:hover, .pick input:hover + span { background: var(--glass-fill-hover) }
 
 /* Logo et icônes */
 .logo { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font: 600 24px/1 var(--font-display); letter-spacing: -.03em; color: var(--text) }
@@ -111,7 +121,7 @@ main > .wrap:has(> .crumbs:only-child) + section { padding-top: 20px }
 /* Étiquettes */
 .tag { font: 600 11px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; padding: 6px 9px; border-radius: var(--radius-sm); background: var(--sage); color: var(--forest) }
 .tag-ex { background: transparent; border: 1px dashed var(--text-muted); color: var(--text-muted) }
-.chip { font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: var(--radius-pill); background: var(--surface); color: var(--text-brand); border: 1px solid var(--line) }
+.chip { font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: var(--radius-pill); background: rgba(190, 221, 176, .08); color: var(--text-brand); border: 1px solid var(--line) }
 
 /* 5. Accueil ----------------------------------------------------------- */
 /* Hero */
@@ -281,15 +291,16 @@ main > .wrap:has(> .crumbs:only-child) + section { padding-top: 20px }
 .contact-copy ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 12px }
 .contact-copy li { display: flex; gap: 12px; align-items: baseline }
 .contact-copy li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--sage); transform: translateY(-1px) }
-form { background: var(--surface-raised); border: 1px solid var(--line); color: var(--text); border-radius: var(--radius-lg); padding: clamp(20px, 3.5vw, 36px); display: grid; gap: 18px; min-width: 0 }
+form { color: var(--text); border-radius: var(--radius-lg); padding: clamp(20px, 3.5vw, 36px); display: grid; gap: 18px; min-width: 0 }
 fieldset { border: 0; margin: 0; padding: 0; min-width: 0 }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px }
 .field { display: grid; gap: 7px; min-width: 0 }
 .field > label { font-size: 14px; font-weight: 600 }
 .opt { font-weight: 400; color: var(--text-muted) }
-input[type="text"], input[type="tel"], input[type="email"], select, textarea { width: 100%; font: 400 16px/1.4 var(--font-body); color: var(--text); background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px }
+input[type="text"], input[type="tel"], input[type="email"], select, textarea { width: 100%; font: 400 16px/1.4 var(--font-body); color: var(--text); background: rgba(0, 0, 0, .28); border: 1.5px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px }
 input:hover, select:hover, textarea:hover { border-color: var(--text-muted) }
 textarea { min-height: 116px; resize: vertical }
+select option { background: var(--surface-raised); color: var(--text) }
 .err { font-size: 13px; color: var(--danger) }
 .err:empty { display: none }
 .field.invalid input, .field.invalid textarea { border-color: var(--danger) }
@@ -312,15 +323,14 @@ textarea { min-height: 116px; resize: vertical }
 .pick { position: relative; min-width: 0 }
 .pick-wide { grid-column: 1 / -1 }
 .pick input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer }
-.pick span { display: grid; grid-template-columns: 36px 1fr; column-gap: 12px; align-items: center; padding: 14px 40px 14px 14px; min-height: 76px; border: 1.5px solid var(--line); border-radius: var(--radius-md); background: var(--surface); position: relative; transition: border-color .15s, background .15s }
+.pick span { display: grid; grid-template-columns: 36px 1fr; column-gap: 12px; align-items: center; padding: 14px 40px 14px 14px; min-height: 76px; border-radius: var(--radius-md); position: relative; transition: border-color .15s, background .15s }
 .pick span::after { content: ""; position: absolute; top: 12px; right: 12px; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--line) }
 .pick svg { width: 36px; height: 36px; grid-row: span 2 }
 .pick b { font: 600 15px/1.3 var(--font-display); color: var(--text) }
 .pick small { font-size: 12.5px; line-height: 1.35; color: var(--text-muted) }
 .pick-wide span { grid-template-columns: 1fr; min-height: 0 }
-.pick input:hover + span { border-color: var(--text-muted) }
 .pick input:focus-visible + span { outline: 2px solid var(--highlight); outline-offset: 2px }
-.pick input:checked + span { border-color: var(--accent); background: var(--surface-raised); box-shadow: inset 0 0 0 1px var(--accent) }
+.pick input:checked + span { border-color: var(--accent); background: var(--glass-fill-hover); box-shadow: inset 0 0 0 1px var(--accent), var(--glass-shadow) }
 .pick input:checked + span::after { background: var(--highlight); border-color: var(--highlight) }
 .done { display: grid; gap: 14px; justify-items: start; padding-block: 12px }
 .done svg { width: 56px; height: 56px }
@@ -360,7 +370,7 @@ textarea { min-height: 116px; resize: vertical }
 .closing h2 { color: var(--cream); font-size: clamp(32px, 5vw, 54px); line-height: 1.08; letter-spacing: -.03em }
 .closing p { color: var(--cream); opacity: .82; max-width: 52ch }
 .closing .btn { margin-top: 8px }
-.foot-card { background: var(--glass-strong); border: 1px solid var(--line); backdrop-filter: blur(12px); color: var(--text); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .8fr) minmax(0, .9fr) minmax(0, 1.4fr); gap: 32px; align-items: start }
+.foot-card { color: var(--text); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .8fr) minmax(0, .9fr) minmax(0, 1.4fr); gap: 32px; align-items: start }
 .foot-brand { display: grid; gap: 14px }
 .foot-brand .logo { font-size: 30px }
 .foot-brand .logo svg { width: 38px; height: 38px }
